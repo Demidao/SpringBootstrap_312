@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/html">
+<body>
+<div th:fragment="tabPaneNewUser" class="card">
+    <h4 class="card-header">New user</h4>
+    <div class="card-body text-center">
+        <form th:method="POST"
+              th:action="@{/admin/tab-pane-newuser}"
+              th:object="${newUser}">
+            <div class="mb-3">
+                <label for="firstname"
+                       class="form-label">
+                    First name</label>
+                <input type="text"
+                       th:field="*{firstname}"
+                       id="firstname"
+                       class="form-control"
+                       placeholder="John">
+            </div>
+            <div class="mb-3">
+                <label for="lastname"
+                       class="form-label">
+                    Last name</label>
+                <input type="text"
+                       th:field="*{lastname}"
+                       class="form-control"
+                       id="lastname"
+                       placeholder="Doe">
+            </div>
+            <div class="mb-3">
+                <label for="age"
+                       class="form-label">
+                    Age</label>
+                <input type="number"
+                       th:field="*{age}"
+                       value="18" min="18" max="150"
+                       class="form-control"
+                       id="age">
+            </div>
+            <div class="mb-3">
+                <label for="email"
+                       class="form-label">
+                    Email</label>
+                <input type="text"
+                       th:field="*{email}"
+                       class="form-control"
+                       id="email"
+                       placeholder="john.doe@examplemail.com">
+            </div>
+            <div class="mb-3">
+                <label for="password"
+                       class="form-label">
+                    Password</label>
+                <input type="password"
+                       th:field="*{password}"
+                       class="form-control"
+                       id="password"
+                       placeholder="Put your password here">
+            </div>
+            <div class="form-group">
+                <label for="newUserRoles">Assign roles</label>
+                <select multiple
+                        class="form-control"
+                        name="newRoles"
+                        id="newUserRoles"
+                        th:object="${newUserRoles}">
+                    <option th:each="role : ${allRoles}"
+                            th:value="${role.toString()}"
+                            th:text="${role.toString()}">
+                    </option>
+                </select>
+            </div>
+            </br>
+            <button type="submit"
+                    class="btn btn-primary">
+                Add new user
+            </button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

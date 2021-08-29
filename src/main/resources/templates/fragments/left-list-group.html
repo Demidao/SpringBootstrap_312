@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns="http://www.w3.org/1999/html">
+<body>
+<div th:fragment="leftListGroup">
+    <div class="list-group">
+        <ul class="nav nav-pills flex-column">
+            <div sec:authorize="hasRole('ADMIN')">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="/admin">Admin</a>
+                </li>
+            </div>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="/users">User</a>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

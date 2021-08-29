@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/html">
+<body>
+<div th:fragment="adminTabContent" class="tab-content">
+    <h1 class="h2">Admin panel</h1>
+    <nav>
+        <div class="nav nav-tabs" id="admin-nav-tab" role="tablist">
+            <button class="nav-link active"
+                    id="adminTabContentAllUsers"
+                    data-bs-toggle="tab"
+                    data-bs-target="#tab-pane-allusers"
+                    type="button"
+                    role="tab"
+                    aria-controls="allUsers"
+                    aria-selected="true">Users table
+            </button>
+            <button class="nav-link"
+                    id="adminTabContentNewUser"
+                    data-bs-toggle="tab"
+                    data-bs-target="#tab-pane-newuser"
+                    type="button"
+                    role="tab"
+                    aria-controls="addNewUser"
+                    aria-selected="false">New user
+            </button>
+        </div>
+    </nav>
+    <div class="tab-content" id="adminTab">
+        <div class="tab-pane fade show active"
+             id="tab-pane-allusers"
+             role="tabpanel"
+             aria-labelledby="adminTabContentAllUsers">
+            <div th:insert="fragments/tab-pane-allusers :: tabPaneAllUsers"></div>
+        </div>
+        <div class="tab-pane fade"
+             id="tab-pane-newuser"
+             role="tabpanel"
+             aria-labelledby="adminTabContentNewUser">
+            <div th:insert="fragments/tab-pane-newuser :: tabPaneNewUser"></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

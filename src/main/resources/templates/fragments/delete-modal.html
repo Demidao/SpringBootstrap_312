@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/html">
+<body>
+<div th:fragment="deleteModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" th:object="${userInModal}">
+                <h5 class="modal-title"
+                    id="editModalLabel">Delete user <b th:text="${userInModal.getFirstname()}">name></b></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form th:method="POST"
+                      th:action="@{/admin/delete/{id}(id=${userInModal.getUser_id()})}"
+                      th:object="${userInModal}">
+                    <div class="mb-3">
+                        <label for="user_id"
+                               class="form-label">ID</label>
+                        <input type="text"
+                               th:value="*{user_id}"
+                               id="user_id"
+                               class="form-control"
+                               readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label for="firstname"
+                               class="form-label">
+                            First name</label>
+                        <input type="text"
+                               th:value="*{firstname}"
+                               id="firstname"
+                               class="form-control"
+                               readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label for="lastname"
+                               class="form-label">
+                            Last name</label>
+                        <input type="text"
+                               th:value="*{lastname}"
+                               class="form-control"
+                               id="lastname"
+                               readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label for="age"
+                               class="form-label">
+                            Age</label>
+                        <input type="number"
+                               th:value="*{age}"
+                               class="form-control"
+                               id="age"
+                               readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email"
+                               class="form-label">
+                            Email</label>
+                        <input type="text"
+                               th:value="*{email}"
+                               class="form-control"
+                               id="email"
+                               readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="newUserRoles">Assign roles</label>
+                        <select multiple
+                                class="form-control"
+                                name="newRoles"
+                                id="newUserRoles"
+                                readonly>
+
+                            <option th:each="role : ${userInModal.getRoles()}"
+                                    th:value="${role.toString()}"
+                                    th:text="${role.toString()}">
+                            </option>
+                        </select>
+                    </div>
+                    </br>
+                    <button type="button"
+                            class="btn btn-primary"
+                            data-bs-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="submit"
+                            class="btn btn-danger">
+                        DELETE
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

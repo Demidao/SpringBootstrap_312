@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/html">
+<body>
+<div th:fragment="tabPaneAllUsers" class="card">
+    <h4 class="card-header">All users</h4>
+    <div class="card-body text-center">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <td>ID</td>
+                <td>Firstname</td>
+                <td>Lastname</td>
+                <td>Age</td>
+                <td>email</td>
+                <td>Role</td>
+                <td>Edit</td>
+                <td>Delete</td>
+
+            </tr>
+            </thead>
+            <tbody>
+            <div th:each="user : ${userList}">
+                <tr>
+                    <td><p th:text="${user.getUser_id()}">ID</td>
+                    <td><p th:text="${user.getFirstname()}">name</td>
+                    <td><p th:text="${user.getLastname()}">lastname</td>
+                    <td><p th:text="${user.getAge()}">Age</td>
+                    <td><p th:text="${user.getEmail()}">email</td>
+                    <td><p th:text="${user.getRoles()}">Roles</td>
+                    <td>
+                        <!-- Button trigger modal -->
+                        <button type="button"
+                                class="btn btn-primary"
+                                data-bs-toggle="modal"
+                                th:attr="data-bs-target='#edit_' + ${user.getUser_id()}">
+                            Edit
+                        </button>
+                    </td>
+                    <td>
+                        <button type="button"
+                                class="btn btn-danger"
+                                data-bs-toggle="modal"
+                                th:attr="data-bs-target='#delete_' + ${user.getUser_id()}">
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+            </div>
+            </tbody>
+            <!-- Modal -->
+            <div th:each="userInModal : ${userList}">
+                <div th:attr="id='edit_' + ${userInModal.getUser_id()}"
+                     th:insert="~{fragments/edit-modal :: editModal}"
+                     class="modal fade"
+                     id="editModal"
+                     data-bs-backdrop="static"
+                     data-bs-keyboard="false"
+                     tabindex="-1"
+                     aria-labelledby="editModalLabel"
+                     aria-hidden="true">Modal editor
+                </div>
+            </div>
+
+            <div th:each="userInModal : ${userList}">
+                <div th:attr="id='delete_' + ${userInModal.getUser_id()}"
+                     th:insert="~{fragments/delete-modal :: deleteModal}"
+                     class="modal fade"
+                     id="deleteModal"
+                     data-bs-backdrop="static"
+                     data-bs-keyboard="false"
+                     tabindex="-1"
+                     aria-labelledby="deleteModalModalLabel"
+                     aria-hidden="true">Modal deleter
+                </div>
+            </div>
+        </table>
+    </div>
+</div>
+</body>
+</html>
